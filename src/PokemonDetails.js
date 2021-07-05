@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import NotFound from './NotFound';
 
 class PokemonDetails extends React.Component {
   render(){
     const { pokemons } = this.props;
     const { match: {params : { pokeId } } } = this.props;
     const pokemon = pokemons.find((poke) => poke.id === Number(pokeId));
-    return (
+    
+    return pokemon ? (
       <div className="pokemonInfo">
         <h2>{ `${pokemon.name} Info!`}</h2>
         <div className="pokemon">
@@ -32,7 +34,7 @@ class PokemonDetails extends React.Component {
           })}
         </div>
       </div>
-    );
+    ) : <NotFound /> ;
   }
 }
 
