@@ -5,6 +5,7 @@ import Pokedex from './Pokedex';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './Header';
 import About from './About';
+import PokemonDetails from './PokemonDetails';
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
         {...props} 
         pokemons={pokemons} /> } 
         />
+        <Route path="/pokemon/:pokeId" render={(props ) => <PokemonDetails 
+        {...props} 
+        pokemons={ pokemons } /> } />
         <Route path="/about" component={ About } />
       </BrowserRouter>
       

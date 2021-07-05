@@ -1,20 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class PokemonDetails extends React.Component {
   render(){
-    const { name, type, averageWeight, image, foundAt } = this.props.pokemon;
+    const { pokemons } = this.props;
+    const { match: {params : { pokeId } } } = this.props;
+    const pokemon = pokemons.find((poke) => poke.id === Number(pokeId));
     return (
-      <div className="pokemon">
-        <div>
-          <p>{name}</p>
-          <p>{type}</p>
-          <p>
-            Average weight: {`${averageWeight.value} ${averageWeight.measurementUnit}`}
-          </p>
+      <div className="pokemonInfo">
+        <h2>{ `${pokemon.name} Info!`}</h2>
+        <div className="pokemon">
+          <div>
+            <p>{ pokemon.name }</p>
+            <p>{ pokemon.type }</p>
+            <p>
+              Average weight: { `${pokemon.averageWeight.value} ${pokemon.averageWeight.measurementUnit}` }
+            </p>
+          </div>
+        <img src={ pokemon.image } alt={ `${ pokemon.name } sprite` } />
         </div>
-        <img src={image} alt={`${name} sprite`} />
+        <h3>Summary</h3>
+        <p>{ pokemon.summary }</p>
         <div className="maps">
-          { foundAt.map((map) => {
+          { pokemon.foundAt.map((map) => {
             return (
               <div key={ map.location }>
                 <h5>{ map.location }</h5>
@@ -26,6 +34,10 @@ class PokemonDetails extends React.Component {
       </div>
     );
   }
+}
+
+PokemonDetails.propTypes = {
+  pokemons: PropTypes.array,
 }
 
 export default PokemonDetails;
