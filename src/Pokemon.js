@@ -1,9 +1,16 @@
 import React from 'react';
 import './pokemon.css';
+import { Link } from 'react-router-dom';
 
 class Pokemon extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      favoritos: [],
+    }
+  }
   render() {
-    const {name, type, averageWeight, image} = this.props.pokemon;
+    const { name, type, averageWeight, image, id } = this.props.pokemon;
     return (
       <div className="pokemon">
         <div>
@@ -14,6 +21,7 @@ class Pokemon extends React.Component {
           </p>
         </div>
         <img src={image} alt={`${name} sprite`} />
+        <Link to={`/pokemon/${id}`}>More Info</Link>
       </div>
     );
   }
